@@ -665,7 +665,7 @@ void ThresholdSlider::paint(Graphics& g)
 
 }
 
-Path ThresholdSlider::makeRotaryPath(double min, double max, double val)
+/*th ThresholdSlider::makeRotaryPath(double min, double max, double val)
 {
 
     Path p;
@@ -685,6 +685,32 @@ Path ThresholdSlider::makeRotaryPath(double min, double max, double val)
 
     return p;
 
+}*/
+
+Path ThresholdSlider::makeRotaryPath(double min, double max, double val)
+{
+
+    Path p;
+
+    double start;
+    double range;
+    if (val == 0)
+    {
+        start = 20;
+        range = val/(1.3*max)*double_Pi ;
+    }
+    if (val > 0)
+    {
+        start = 0;
+        range = (val)/(1.3*max )*double_Pi ;
+    }
+    if (val < 0) {
+        start = -(val)/(1.3*min)*double_Pi ;
+        range = 0;
+    }
+    p.addPieSegment(6,6, getWidth()-12, getHeight()-12, start, range, 0.65);
+
+    return p;
 }
 
 void ThresholdSlider::setActive(bool t)
